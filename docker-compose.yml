@@ -1,0 +1,41 @@
+version: "3.8"
+services:
+ frontend:
+  image: httpd
+  ports:
+    - 8083:80
+  volumes:
+    - C:\Users\HELLO\simple_flask_app\volume:/usr/local/apache2/htdocs
+  networks:
+    - front
+  depends_on:
+    - backend
+ backend:
+  image: myapp:0.1
+  ports:
+    - 5000:5000
+  networks:
+    - front
+    - back
+  depends_on:
+    - database
+ database:
+  image: mariadb
+  environment:
+    - MARIADB_ROOT_PASSWORD=pass
+  volumes:
+    - database:/var/lib/mysql
+  ports:
+    - 8080:8080
+  networks:
+    - back
+
+networks:
+ front:
+  driver: bridge
+ back:
+  driver: bridge
+volumes:
+ database:
+
+
