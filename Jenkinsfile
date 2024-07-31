@@ -9,7 +9,7 @@ pipeline {
     stage('Build Docker Image') {
       steps {
           script {
-              def imageName = 'my-app'
+              def imageName = 'myapp:0.1'
               def imageTag = 'latest'
               docker.build("${imageName}:${imageTag}")
                 }
