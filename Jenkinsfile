@@ -7,7 +7,7 @@ pipeline {
                 echo 'Testing...'
                 snykSecurity(
                     snykInstallation: 'snyk@latest',
-                    snykTokenId: 'snyk-api-token',  // Ensure this ID is correct
+                    snykTokenId: 'snyk-new',  // Ensure this ID is correct
                     targetFile: 'requirements.txt', // Adjust as necessary
                     failOnIssues: true // Fail the build if vulnerabilities are found
                 )
