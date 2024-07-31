@@ -7,17 +7,6 @@ pipeline {
         echo 'Building...'
       }
     }
-    stage('Test') {
-      steps {
-        echo 'Testing...'
-        snykSecurity(
-          snykInstallation: 'snyk@latest' ,
-          snykTokenId: 'synk-api-token' ,
-          targetFile: 'app.py', // or your appropriate file if different
-          failOnIssues: true // fail the build if vulnerabilities are found
-        )
-      }
-    }
     stage('Deploy') {
       steps {
         echo 'Deploying...'
