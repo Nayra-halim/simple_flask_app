@@ -7,6 +7,15 @@ pipeline {
         echo 'Building...'
       }
     }
+    stage('Build Docker Image') {
+      steps {
+          script {
+              def imageName = 'my-app'
+              def imageTag = 'latest'
+              docker.build("${imageName}:${imageTag}")
+                }
+            }
+        }
     stage('Test') {
     steps {
         echo 'Testing...'
