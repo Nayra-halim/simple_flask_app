@@ -11,10 +11,8 @@ pipeline {
       steps {
         echo 'Testing...'
         snykSecurity(
-          snykInstallation: '<Your Snyk Installation Name>',
-          snykTokenId: '<Your Snyk API Token ID>',
-          // place other optional parameters here, for example:
-          additionalArguments: '--all-projects --detection-depth=<DEPTH>'
+          snykInstallation: '<synk@latest>',
+          snykTokenId: '<synk-api-token>',
         )
       }
     }
