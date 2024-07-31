@@ -12,7 +12,9 @@ pipeline {
         echo 'Testing...'
         snykSecurity(
             snykInstallation: 'snyk@latest',
-            snykTokenId: 'synk-new',  // Ensure this is a valid credential ID
+            snykTokenId: 'synk-new',
+            targetFile: 'simple_flask_app', // Use the appropriate file for your dependencies
+            failOnIssues: true // Fail the build if vulnerabilities are found
         )
     }
 }
