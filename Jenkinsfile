@@ -1,28 +1,30 @@
 pipeline {
-  agent any
+    agent any
 
-  stages {
-    stage('Build') {
-      steps {
-        echo 'Building...'
-      }
-    }
-    stage('Test') {
-    steps {
-        echo 'Testing...'
-        snykSecurity(
-            snykInstallation: 'snyk@latest',
-            snykTokenId: 'synk-new',  // Ensure this is a valid credential ID
-            targetFile: './requirements.txt', // Use the appropriate file for your dependencies
-            failOnIssues: true // Fail the build if vulnerabilities are found
-        )
-    }
-}
+    stages {
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+                snykSecurity(
+                    snykInstallation: 'snyk@latest',
+                    snykTokenId: 'snyk-api-token',  // Ensure this ID is correct
+                    targetFile: 'requirements.txt', // Adjust as necessary
+                    failOnIssues: true // Fail the build if vulnerabilities are found
+                )
+            }
+        }
 
-    stage('Deploy') {
-      steps {
-        echo 'Deploying...'
-      }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Define Docker image name and tag
+                    def imageName = 'my-app'
+                    def imageTag = 'latest'
+                    
+                    // Build Docker image
+                    docker.build("${imageName}:${imageTag}")
+                }
+            }
+        }
     }
-  }
 }
