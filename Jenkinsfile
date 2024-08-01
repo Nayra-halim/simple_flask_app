@@ -8,11 +8,6 @@ pipeline {
         echo 'Building...'
       }
     }
-    stage('Build Docker Image') {
-      steps {
-          echo 'flask version'
-            }
-        }
     stage('Test') {
     steps {
         echo 'Testing...'
@@ -22,8 +17,13 @@ pipeline {
             targetFile: 'simple_flask_app', 
             failOnIssues: true 
         )
-    }
-}
+      }
+     }
+    stage('Build Docker Image') {
+      steps {
+          echo 'flask version'
+            }
+        }
 
     stage('Deploy') {
       steps {
