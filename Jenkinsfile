@@ -1,5 +1,7 @@
 pipeline {
-  agent any
+  agent {
+    dockerfile true
+  }
   stages {
     stage('Build') {
       steps {
@@ -8,11 +10,7 @@ pipeline {
     }
     stage('Build Docker Image') {
       steps {
-          script {
-              def imageName = 'myapp:0.1'
-              def imageTag = 'latest'
-              docker.build("${imageName}:${imageTag}")
-                }
+          echo 'flask version'
             }
         }
     stage('Test') {
@@ -21,8 +19,8 @@ pipeline {
         snykSecurity(
             snykInstallation: 'snyk@latest',
             snykTokenId: 'synk-new',
-            targetFile: 'simple_flask_app', // Use the appropriate file for your dependencies
-            failOnIssues: true // Fail the build if vulnerabilities are found
+            targetFile: 'simple_flask_app', 
+            failOnIssues: true 
         )
     }
 }
